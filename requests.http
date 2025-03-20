@@ -1,0 +1,7 @@
+### Sending POST request to the LLM model.
+POST http://localhost:8080/send-message
+Content-Type: application/json
+
+{
+  "question": "Give me our expenses for the last 3 months"
+}
