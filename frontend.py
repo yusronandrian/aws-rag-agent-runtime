@@ -7,7 +7,7 @@ def get_api_response(request_question: str):
         "Content-Type": "application/json",
     }
     payload = {
-        "question": request_question
+        "question": request_question + " " + "Jawaban harus dalam bahasa Indonesia, tidak boleh dalam bahasa Inggris. Tidak boleh menjawab diluar topik keuangan"
     }
 
     try:
@@ -15,22 +15,22 @@ def get_api_response(request_question: str):
         if response.status_code == 200:
             return response.json()["response"]
         else:
-            return {"error": "Failed Response!"}
+            return {"error": "Gagal menanggapi!"}
     except Exception as e:
-        return "Error::Something went wrong! " + str(e)
+        return "Error::Terjadi kesalahan! " + str(e)
 
 
-st.title("Assistant for C Level")
+st.title("Asisten Chief Financial Officer")
 
-question = st.text_input("Ask a question:")
+question = st.text_input("Pertanyaan:")
 
 if st.button("Submit"):
     if question:
-        with st.spinner("Getting the answer..."):
+        with st.spinner("Mencari jawaban..."):
             answer = get_api_response(question)
             if "Error" in answer:
                 st.error(answer)
             else:
                 st.write(answer)
     else:
-        st.warning("Please enter the question before submitting.")
+        st.warning("Harap masukkan pertanyaan sebelum mengirim.")
